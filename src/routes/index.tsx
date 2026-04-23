@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Clock, Flame, Star } from "lucide-react";
+import { MapPin, Phone, Clock, Flame, Star, Instagram, MessageCircle, Truck } from "lucide-react";
 import burgerHero from "@/assets/burger-hero.png";
 import sbhLogo from "@/assets/sbh-logo.png";
 import kingFighters from "@/assets/king-fighters.png";
@@ -12,12 +12,14 @@ export const Route = createFileRoute("/")({
 });
 
 const menu = [
-  { name: "Playstation", desc: "Carne smash, cheddar y bacon", tag: "TOP" },
-  { name: "Pokémon", desc: "Carne smash, cheddar, huevo y trufa", tag: "PREMIUM" },
-  { name: "Super Mario Bros", desc: "Carne smash, bacon, mozzarella y BBQ", tag: "ICÓNICA" },
-  { name: "Nachos con chili", desc: "Crujientes con chili casero", tag: "SHARE" },
-  { name: "Tequeños", desc: "Crujientes rellenos de queso", tag: "SHARE" },
-  { name: "Patatas Cheddar & Bacon", desc: "Patatas con cheddar fundido y bacon", tag: "FAV" },
+  { name: "S+ Basic", desc: "Pan de patata tostado en mantequilla, cebolla cruda, pepinillo, smash burger, queso americano, salsa S+ casera", price: "6,99€", tag: "BASIC" },
+  { name: "S+ Doble", desc: "Pan de patata, cebolla cruda, pepinillo, doble smash burger, dos lonchas de queso americano, salsa S+ casera", price: "8,99€", tag: "DOBLE" },
+  { name: "S+ Bacon", desc: "Pan de patata, mermelada de bacon, bacon crujiente, doble smash, dos lonchas de queso americano, salsa de bacon ahumado", price: "9,99€", tag: "TOP" },
+  { name: "S+ Trufada", desc: "Pan de patata, cebolla confitada, bacon crujiente, doble smash, queso americano, salsa trufada casera", price: "10,99€", tag: "PREMIUM" },
+  { name: "S+ Ribs", desc: "Pan de patata, doble smash burger, queso americano, carne mechada de costilla y panceta con salsa BBQ al bourbon", price: "12,40€", tag: "ICÓNICA" },
+  { name: "S+ Chicken", desc: "Pan de patata, contramuslo de pollo crujiente, pepinillo, cebolla agridulce, salsa S+ casera", price: "9,99€", tag: "CRUNCH" },
+  { name: "S+ Vegetal", desc: "Pan de patata tostado, carne vegetariana, bacon vegetariano, salsitas", price: "9,99€", tag: "VEGGIE" },
+  { name: "S+ Junior", desc: "Pan slider en mantequilla, una smash burger, salsitas", price: "4,99€", tag: "KIDS" },
 ];
 
 function Nav() {
@@ -72,12 +74,18 @@ function Index() {
             <p className="text-lg text-muted-foreground max-w-md mb-8">
               Carne aplastada en plancha al rojo vivo, costra crujiente y sabor intenso. Recetas argentinas, alma barcelonesa.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               <a href="#menu" className="px-6 py-3 rounded-full bg-[var(--neon-red)] text-white font-bold uppercase tracking-wider neon-border-red hover:scale-105 transition">
                 Ver menú
               </a>
-              <a href="tel:+34934559038" className="px-6 py-3 rounded-full glass font-bold uppercase tracking-wider hover:neon-border-blue transition flex items-center gap-2">
-                <Phone className="h-4 w-4" /> +34 934 559 038
+              <a href="https://glovoapp.com/es/es/castelldefels/sbh-smash-burger-house-cas/" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-[#FFC244] text-black font-bold uppercase tracking-wider hover:scale-105 transition flex items-center gap-2">
+                <Truck className="h-4 w-4" /> Glovo
+              </a>
+              <a href="https://wa.me/34934559038" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-[#25D366] text-black font-bold uppercase tracking-wider hover:scale-105 transition flex items-center gap-2">
+                <MessageCircle className="h-4 w-4" /> WhatsApp
+              </a>
+              <a href="https://instagram.com/sbh_castelldefels" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full glass font-bold uppercase tracking-wider hover:neon-border-blue transition flex items-center gap-2">
+                <Instagram className="h-4 w-4" /> Instagram
               </a>
             </div>
           </motion.div>
@@ -112,7 +120,7 @@ function Index() {
             <h2 className="text-5xl md:text-7xl font-display">
               SMASH <span className="neon-text-blue">CLASSICS</span>
             </h2>
-            <p className="text-muted-foreground mt-4 text-sm uppercase tracking-widest">Rango de precios ~10–20€</p>
+            <p className="text-muted-foreground mt-4 text-sm uppercase tracking-widest">Añade patatas y bebida por <span className="neon-text-red font-bold">+2,90€</span></p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -125,10 +133,11 @@ function Index() {
                 transition={{ delay: i * 0.05 }}
                 className="glass rounded-2xl p-6 hover:neon-border-red transition group"
               >
-                <div className="flex items-start justify-between mb-3">
+                <div className="flex items-start justify-between mb-3 gap-3">
                   <span className="text-[10px] tracking-widest px-2 py-1 rounded-full bg-[var(--neon-red)]/20 text-[var(--neon-red)] border border-[var(--neon-red)]/40">
                     {item.tag}
                   </span>
+                  <span className="font-display text-2xl neon-text-blue">{item.price}</span>
                 </div>
                 <h3 className="text-2xl font-display mb-2 group-hover:neon-text-red transition">{item.name}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
