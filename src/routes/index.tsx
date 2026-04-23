@@ -88,10 +88,6 @@ function Index() {
                 <Instagram className="h-4 w-4" /> Instagram
               </a>
             </div>
-              <a href="tel:+34934559038" className="px-6 py-3 rounded-full glass font-bold uppercase tracking-wider hover:neon-border-blue transition flex items-center gap-2">
-                <Phone className="h-4 w-4" /> +34 934 559 038
-              </a>
-            </div>
           </motion.div>
 
           <motion.div
