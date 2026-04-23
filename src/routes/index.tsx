@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Clock, Flame, Star } from "lucide-react";
+import { MapPin, Phone, Clock, Flame, Star, Instagram, MessageCircle, Truck } from "lucide-react";
 import burgerHero from "@/assets/burger-hero.png";
 import sbhLogo from "@/assets/sbh-logo.png";
 import kingFighters from "@/assets/king-fighters.png";
@@ -12,12 +12,14 @@ export const Route = createFileRoute("/")({
 });
 
 const menu = [
-  { name: "Playstation", desc: "Carne smash, cheddar y bacon", tag: "TOP" },
-  { name: "Pokémon", desc: "Carne smash, cheddar, huevo y trufa", tag: "PREMIUM" },
-  { name: "Super Mario Bros", desc: "Carne smash, bacon, mozzarella y BBQ", tag: "ICÓNICA" },
-  { name: "Nachos con chili", desc: "Crujientes con chili casero", tag: "SHARE" },
-  { name: "Tequeños", desc: "Crujientes rellenos de queso", tag: "SHARE" },
-  { name: "Patatas Cheddar & Bacon", desc: "Patatas con cheddar fundido y bacon", tag: "FAV" },
+  { name: "S+ Basic", desc: "Pan de patata tostado en mantequilla, cebolla cruda, pepinillo, smash burger, queso americano, salsa S+ casera", price: "6,99€", tag: "BASIC" },
+  { name: "S+ Doble", desc: "Pan de patata, cebolla cruda, pepinillo, doble smash burger, dos lonchas de queso americano, salsa S+ casera", price: "8,99€", tag: "DOBLE" },
+  { name: "S+ Bacon", desc: "Pan de patata, mermelada de bacon, bacon crujiente, doble smash, dos lonchas de queso americano, salsa de bacon ahumado", price: "9,99€", tag: "TOP" },
+  { name: "S+ Trufada", desc: "Pan de patata, cebolla confitada, bacon crujiente, doble smash, queso americano, salsa trufada casera", price: "10,99€", tag: "PREMIUM" },
+  { name: "S+ Ribs", desc: "Pan de patata, doble smash burger, queso americano, carne mechada de costilla y panceta con salsa BBQ al bourbon", price: "12,40€", tag: "ICÓNICA" },
+  { name: "S+ Chicken", desc: "Pan de patata, contramuslo de pollo crujiente, pepinillo, cebolla agridulce, salsa S+ casera", price: "9,99€", tag: "CRUNCH" },
+  { name: "S+ Vegetal", desc: "Pan de patata tostado, carne vegetariana, bacon vegetariano, salsitas", price: "9,99€", tag: "VEGGIE" },
+  { name: "S+ Junior", desc: "Pan slider en mantequilla, una smash burger, salsitas", price: "4,99€", tag: "KIDS" },
 ];
 
 function Nav() {
