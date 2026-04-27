@@ -150,18 +150,19 @@ function Index() {
             <h2 className="text-5xl md:text-7xl font-display">
               SMASH <span className="neon-text-blue">CLASSICS</span>
             </h2>
-            <p className="text-muted-foreground mt-4 text-sm uppercase tracking-widest">Añade patatas y bebida por <span className="neon-text-red font-bold">+2,90€</span></p>
+            <p className="text-muted-foreground mt-4 text-sm uppercase tracking-widest">Carta original SBH · precios reales</p>
           </motion.div>
 
+          <h3 className="font-display text-3xl mb-6 neon-text-red">BURGERS</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {menu.map((item, i) => (
+            {burgers.map((item, i) => (
               <motion.div
                 key={item.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="glass rounded-2xl p-6 hover:neon-border-red transition group"
+                transition={{ delay: i * 0.04 }}
+                className="glass-strong rounded-2xl p-6 hover:neon-border-red transition group relative overflow-hidden"
               >
                 <div className="flex items-start justify-between mb-3 gap-3">
                   <span className="text-[10px] tracking-widest px-2 py-1 rounded-full bg-[var(--neon-red)]/20 text-[var(--neon-red)] border border-[var(--neon-red)]/40">
@@ -173,6 +174,44 @@ function Index() {
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
               </motion.div>
             ))}
+          </div>
+
+          <h3 className="font-display text-3xl mt-16 mb-6 neon-text-blue">ENTRANTES</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sides.map((item) => (
+              <div key={item.name} className="glass rounded-2xl p-5 hover:neon-border-blue transition">
+                <div className="flex items-start justify-between mb-2 gap-3">
+                  <h4 className="font-display text-xl">{item.name}</h4>
+                  <span className="font-display text-xl neon-text-red">{item.price}</span>
+                </div>
+                <p className="text-sm text-muted-foreground">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-16">
+            <div className="glass-strong rounded-2xl p-6">
+              <h3 className="font-display text-2xl mb-4 neon-text-red">POSTRES</h3>
+              <ul className="space-y-2">
+                {desserts.map((d) => (
+                  <li key={d.name} className="flex justify-between border-b border-border py-2 text-sm">
+                    <span>{d.name}</span>
+                    <span className="font-bold neon-text-blue">{d.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="glass-strong rounded-2xl p-6">
+              <h3 className="font-display text-2xl mb-4 neon-text-blue">BEBIDAS</h3>
+              <ul className="space-y-2">
+                {drinks.map((d) => (
+                  <li key={d.name} className="flex justify-between border-b border-border py-2 text-sm">
+                    <span>{d.name}</span>
+                    <span className="font-bold neon-text-red">{d.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
