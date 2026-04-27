@@ -152,8 +152,9 @@ function Index() {
       </section>
 
       {/* ABOUT / GALLERY */}
-      <section id="about" className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <section id="about" className="py-24 relative overflow-hidden">
+        <div className="neon-orb-red orb-float top-10 right-0" />
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative">
           <div className="grid grid-cols-2 gap-4">
             <img src={kingFighters} alt="Smash burger SBH" className="rounded-2xl col-span-2 neon-border-blue" />
             <img src={burgerHands} alt="Smash burger close up" className="rounded-2xl" />
@@ -184,9 +185,11 @@ function Index() {
       </section>
 
       {/* VISIT */}
-      <section id="visit" className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="glass rounded-3xl p-8 md:p-12 grid md:grid-cols-2 gap-10 neon-border-red">
+      <section id="visit" className="py-24 relative overflow-hidden">
+        <div className="neon-orb-blue orb-float top-0 left-0" />
+        <div className="neon-orb-red orb-float bottom-0 right-0" style={{ animationDelay: "4s" }} />
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <div className="glass-strong rounded-3xl p-8 md:p-12 grid md:grid-cols-2 gap-10 neon-border-red">
             <div>
               <p className="uppercase text-sm tracking-[0.3em] neon-text-blue mb-3">Visítanos</p>
               <h2 className="text-5xl font-display mb-8">
