@@ -52,8 +52,10 @@ function Index() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative min-h-screen grid-bg flex items-center pt-24 pb-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/40 to-background pointer-events-none" />
+      <section className="relative min-h-screen grid-bg flex items-center pt-24 pb-16 overflow-hidden">
+        <div className="neon-orb-red orb-float -top-40 -left-40" />
+        <div className="neon-orb-blue orb-float top-1/2 -right-40" style={{ animationDelay: "3s" }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -98,7 +100,7 @@ function Index() {
           >
             <div className="absolute -inset-8 bg-[var(--neon-red)] opacity-30 blur-3xl rounded-full" />
             <img src={burgerHero} alt="SBH signature smash burger" className="relative rounded-3xl w-full neon-border-red" />
-            <div className="absolute -bottom-4 -left-4 glass rounded-2xl px-4 py-3 flex items-center gap-2">
+            <div className="absolute -bottom-4 -left-4 glass-strong rounded-2xl px-4 py-3 flex items-center gap-2">
               <Star className="h-4 w-4 text-[var(--neon-red)] fill-[var(--neon-red)]" />
               <span className="font-bold">4.9</span>
               <span className="text-xs text-muted-foreground">/ valoración local</span>
@@ -108,8 +110,10 @@ function Index() {
       </section>
 
       {/* MENU */}
-      <section id="menu" className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="menu" className="py-24 relative overflow-hidden">
+        <div className="neon-orb-blue orb-float top-20 left-1/4" />
+        <div className="neon-orb-red orb-float bottom-20 right-1/4" style={{ animationDelay: "5s" }} />
+        <div className="max-w-7xl mx-auto px-6 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
