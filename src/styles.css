@@ -172,11 +172,46 @@
 
 @layer utilities {
   .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    background: linear-gradient(135deg, oklch(0.98 0.005 0 / 0.06), oklch(0.98 0.005 0 / 0.02));
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 oklch(0.98 0.005 0 / 0.08), 0 8px 32px oklch(0 0 0 / 0.35);
   }
+  .glass-strong {
+    background: linear-gradient(135deg, oklch(0.62 0.27 25 / 0.08), oklch(0.6 0.25 255 / 0.08));
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid oklch(0.98 0.005 0 / 0.15);
+    box-shadow: inset 0 1px 0 oklch(0.98 0.005 0 / 0.1), 0 20px 60px oklch(0 0 0 / 0.5);
+  }
+  .glass-panel {
+    background: oklch(0.17 0.02 20 / 0.25);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border: 1px solid oklch(0.98 0.005 0 / 0.08);
+  }
+  .neon-orb-red {
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, oklch(0.62 0.27 25 / 0.4), transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .neon-orb-blue {
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, oklch(0.6 0.25 255 / 0.4), transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes float-orb {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -30px) scale(1.1); }
+  }
+  .orb-float { animation: float-orb 12s ease-in-out infinite; }
   .neon-text-red {
     color: oklch(0.75 0.25 25);
     text-shadow: 0 0 10px oklch(0.62 0.27 25 / 0.8), 0 0 25px oklch(0.62 0.27 25 / 0.5);
