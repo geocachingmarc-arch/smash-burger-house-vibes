@@ -11,15 +11,41 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const menu = [
-  { name: "S+ Basic", desc: "Pan de patata tostado en mantequilla, cebolla cruda, pepinillo, smash burger, queso americano, salsa S+ casera", price: "6,99€", tag: "BASIC" },
-  { name: "S+ Doble", desc: "Pan de patata, cebolla cruda, pepinillo, doble smash burger, dos lonchas de queso americano, salsa S+ casera", price: "8,99€", tag: "DOBLE" },
-  { name: "S+ Bacon", desc: "Pan de patata, mermelada de bacon, bacon crujiente, doble smash, dos lonchas de queso americano, salsa de bacon ahumado", price: "9,99€", tag: "TOP" },
-  { name: "S+ Trufada", desc: "Pan de patata, cebolla confitada, bacon crujiente, doble smash, queso americano, salsa trufada casera", price: "10,99€", tag: "PREMIUM" },
-  { name: "S+ Ribs", desc: "Pan de patata, doble smash burger, queso americano, carne mechada de costilla y panceta con salsa BBQ al bourbon", price: "12,40€", tag: "ICÓNICA" },
-  { name: "S+ Chicken", desc: "Pan de patata, contramuslo de pollo crujiente, pepinillo, cebolla agridulce, salsa S+ casera", price: "9,99€", tag: "CRUNCH" },
-  { name: "S+ Vegetal", desc: "Pan de patata tostado, carne vegetariana, bacon vegetariano, salsitas", price: "9,99€", tag: "VEGGIE" },
-  { name: "S+ Junior", desc: "Pan slider en mantequilla, una smash burger, salsitas", price: "4,99€", tag: "KIDS" },
+const burgers = [
+  { name: "Simple Cheeseburger", desc: "Pan brioche, una carne smash de ternera y doble cheddar.", price: "10,00€", tag: "CLASSIC" },
+  { name: "Playstation", desc: "Pan brioche, doble carne smash, cheddar y bacon.", price: "14,00€", tag: "TOP" },
+  { name: "Tetris", desc: "Pan brioche, doble smash, cheddar, lechuga, tomate, cebolla morada y mayonesa.", price: "14,00€", tag: "FRESH" },
+  { name: "Pac Man", desc: "Pan brioche, doble smash, cheddar, salsa doble cuarto y pepinillos.", price: "14,00€", tag: "ARCADE" },
+  { name: "Bomberman", desc: "Pan brioche, doble smash, cheddar, cebolla caramelizada y mayonesa.", price: "15,00€", tag: "SWEET" },
+  { name: "Big Sonic", desc: "Pan brioche, doble smash, cheddar, lechuga capuchina, salsa BIG, cebolla picada y pepinillos.", price: "15,00€", tag: "SPEED" },
+  { name: "The King Of Fighters", desc: "Pan brioche, doble smash, cheddar, alioli, lechuga capuchina, cebolla morada y bacon.", price: "16,00€", tag: "KING" },
+  { name: "Mortal Kombat", desc: "Pan brioche, doble smash, cheddar, salsa tekken, cebolla morada, cebolla crispy, bacon, pepinillos y kétchup.", price: "16,00€", tag: "FATALITY" },
+  { name: "Family Game", desc: "Pan brioche, doble smash, queso Roquefort, cebolla caramelizada y mayonesa.", price: "16,00€", tag: "ROQUEFORT" },
+  { name: "Súper Mario Bros", desc: "Pan brioche, doble smash, cheddar, bacon, bastones de mozzarella + salsa BBQ.", price: "17,00€", tag: "ICÓNICA" },
+  { name: "Luigi", desc: "Pan brioche, doble smash, queso de cabra, mermelada de bacon, rúcula y mayonesa verde.", price: "17,00€", tag: "GOURMET" },
+  { name: "Pokémon", desc: "Pan brioche, doble smash, cheddar, huevo (Granja Campomayor) y salsa de trufa negra.", price: "17,00€", tag: "PREMIUM" },
+];
+
+const sides = [
+  { name: "Nachos SBH", desc: "Chili de carne, cheddar cremoso, guacamole, jalapeños.", price: "15,00€" },
+  { name: "Tequeños (6 uds.)", desc: "Con dips.", price: "12,00€" },
+  { name: "Sticks de pollo (6 uds.)", desc: "Con dips.", price: "10,50€" },
+  { name: "Patatas XL", desc: "Simples, provenzal, mayo verde, cheddar+bacon o chili+jalapeños.", price: "6,50–8,50€" },
+  { name: "Patatas small", desc: "Ración pequeña.", price: "3,50€" },
+  { name: "Bastones de mozzarella (4)", desc: "Con dips.", price: "5,50€" },
+];
+
+const desserts = [
+  { name: "Ramon Novarro", price: "6,50€" },
+  { name: "Red Velvet", price: "6,50€" },
+  { name: "Cheesecake", price: "6,50€" },
+  { name: "Tarta Kinder", price: "6,50€" },
+];
+
+const drinks = [
+  { name: "Estrella Galicia 330ml", price: "3,50€" },
+  { name: "Refrescos lata", price: "3,25€" },
+  { name: "Agua 330ml (normal/gas)", price: "2,60€" },
 ];
 
 function Nav() {
