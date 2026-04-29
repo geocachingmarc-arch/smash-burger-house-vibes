@@ -6,6 +6,7 @@ import sbhLogo from "@/assets/sbh-logo.png";
 import kingFighters from "@/assets/king-fighters.png";
 import burgerHands from "@/assets/burger-hands.png";
 import tequenos from "@/assets/tequenos.png";
+import { OrderSystem, buildMenu } from "@/components/OrderSystem";
 
 export const Route = createFileRoute("/")({
   component: Index,
