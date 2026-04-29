@@ -74,9 +74,11 @@ function Nav() {
 }
 
 function Index() {
+  const menu = buildMenu({ burgers, sides, desserts, drinks });
   return (
     <div id="top" className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
+      <OrderSystem menu={menu} />
 
       {/* HERO */}
       <section className="relative min-h-screen grid-bg flex items-center pt-24 pb-16 overflow-hidden">
