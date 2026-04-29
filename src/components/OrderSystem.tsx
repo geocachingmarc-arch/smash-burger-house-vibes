@@ -236,6 +236,73 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Table modal */}
+      <AnimatePresence>
+        {askTable && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setAskTable(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass-strong rounded-3xl p-6 w-full max-w-md neon-border-red relative"
+            >
+              <button
+                onClick={() => setAskTable(false)}
+                className="absolute top-3 right-3 glass p-2 rounded-full hover:neon-border-red transition"
+              >
+                <X className="h-4 w-4" />
+              </button>
+              <p className="uppercase text-[10px] tracking-[0.3em] neon-text-blue mb-1">Último paso</p>
+              <h3 className="font-display text-2xl neon-text-red mb-4">¿En qué mesa estás?</h3>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="text-xs uppercase tracking-widest text-muted-foreground mb-2 block">
+                    Número de mesa
+                  </label>
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    autoFocus
+                    disabled={takeaway}
+                    value={table}
+                    onChange={(e) => setTable(e.target.value)}
+                    placeholder="Ej: 5"
+                    className="w-full glass rounded-xl px-4 py-3 text-lg font-bold text-center focus:outline-none focus:neon-border-red disabled:opacity-40"
+                  />
+                </div>
+
+                <label className="flex items-center gap-3 glass rounded-xl p-3 cursor-pointer hover:neon-border-blue transition">
+                  <input
+                    type="checkbox"
+                    checked={takeaway}
+                    onChange={(e) => setTakeaway(e.target.checked)}
+                    className="w-4 h-4 accent-[var(--neon-red)]"
+                  />
+                  <span className="text-sm">Es un pedido para llevar 📦</span>
+                </label>
+
+                <button
+                  onClick={sendWhatsApp}
+                  disabled={!takeaway && !table.trim()}
+                  className="w-full px-5 py-3 rounded-full bg-[#25D366] text-black font-bold uppercase tracking-wider hover:scale-[1.02] transition flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Enviar por WhatsApp
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
