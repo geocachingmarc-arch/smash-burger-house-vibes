@@ -219,12 +219,12 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
                       </span>
                     </div>
                     <button
-                      onClick={sendWhatsApp}
+                      onClick={() => setAskTable(true)}
                       disabled={totalQty === 0}
                       className="w-full px-5 py-3 rounded-full bg-[#25D366] text-black font-bold uppercase tracking-wider hover:scale-[1.02] transition flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                       <MessageCircle className="h-4 w-4" />
-                      Finalizar por WhatsApp
+                      Continuar por WhatsApp
                     </button>
                     <p className="text-[10px] text-muted-foreground text-center">
                       Te redirigiremos a WhatsApp con tu pedido pre-escrito.
