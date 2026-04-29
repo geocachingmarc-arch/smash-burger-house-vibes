@@ -6,6 +6,7 @@ import sbhLogo from "@/assets/sbh-logo.png";
 import kingFighters from "@/assets/king-fighters.png";
 import burgerHands from "@/assets/burger-hands.png";
 import tequenos from "@/assets/tequenos.png";
+import { OrderSystem, buildMenu } from "@/components/OrderSystem";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -73,9 +74,11 @@ function Nav() {
 }
 
 function Index() {
+  const menu = buildMenu({ burgers, sides, desserts, drinks });
   return (
     <div id="top" className="min-h-screen text-foreground overflow-x-hidden">
       <Nav />
+      <OrderSystem menu={menu} />
 
       {/* HERO */}
       <section className="relative min-h-screen grid-bg flex items-center pt-24 pb-16 overflow-hidden">
