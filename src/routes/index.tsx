@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Clock, Flame, Star, Instagram, MessageCircle, Truck } from "lucide-react";
+import { MapPin, Phone, Clock, Flame, Star, MessageCircle } from "lucide-react";
 import burgerHero from "@/assets/burger-hero.png";
 import sbhLogo from "@/assets/sbh-logo.png";
 import kingFighters from "@/assets/king-fighters.png";
@@ -109,14 +109,8 @@ function Index() {
               <a href="#menu" className="px-6 py-3 rounded-full bg-[var(--neon-red)] text-white font-bold uppercase tracking-wider neon-border-red hover:scale-105 transition">
                 Ver menú
               </a>
-              <a href="https://glovoapp.com/es/es/castelldefels/sbh-smash-burger-house-cas/" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-[#FFC244] text-black font-bold uppercase tracking-wider hover:scale-105 transition flex items-center gap-2">
-                <Truck className="h-4 w-4" /> Glovo
-              </a>
               <a href="https://wa.me/34934559038" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full bg-[#25D366] text-black font-bold uppercase tracking-wider hover:scale-105 transition flex items-center gap-2">
                 <MessageCircle className="h-4 w-4" /> WhatsApp
-              </a>
-              <a href="https://instagram.com/sbh_castelldefels" target="_blank" rel="noreferrer" className="px-6 py-3 rounded-full glass font-bold uppercase tracking-wider hover:neon-border-blue transition flex items-center gap-2">
-                <Instagram className="h-4 w-4" /> Instagram
               </a>
             </div>
           </motion.div>
