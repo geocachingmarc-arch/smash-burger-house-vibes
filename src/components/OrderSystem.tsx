@@ -32,6 +32,9 @@ export function buildMenu(raw: {
 export function OrderSystem({ menu }: { menu: MenuItem[] }) {
   const [open, setOpen] = useState(false);
   const [cart, setCart] = useState<Record<string, CartLine>>({});
+  const [askTable, setAskTable] = useState(false);
+  const [table, setTable] = useState("");
+  const [takeaway, setTakeaway] = useState(false);
 
   const totalQty = useMemo(() => Object.values(cart).reduce((s, l) => s + l.qty, 0), [cart]);
   const total = useMemo(
