@@ -4,12 +4,11 @@ import { ShoppingCart, Plus, Minus, X, MessageCircle, Trash2 } from "lucide-reac
 
 export type MenuItem = { name: string; price: number; desc?: string; category: string };
 
-type CartLine = { item: MenuItem; qty: number };
+type CartLine = { item: MenuItem; qty: number; notes?: string };
 
 const PHONE = "34934559038";
 
 function parsePrice(p: string): number {
-  // takes "10,00€" or "6,50–8,50€" -> first number
   const match = p.replace(/\./g, "").match(/(\d+),(\d+)/);
   if (!match) return 0;
   return parseFloat(`${match[1]}.${match[2]}`);
@@ -36,14 +35,38 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
   const [table, setTable] = useState("");
   const [takeaway, setTakeaway] = useState(false);
 
+  // Notes modal state
+  const [notesItem, setNotesItem] = useState<MenuItem | null>(null);
+  const [noteText, setNoteText] = useState("");
+
   const totalQty = useMemo(() => Object.values(cart).reduce((s, l) => s + l.qty, 0), [cart]);
   const total = useMemo(
     () => Object.values(cart).reduce((s, l) => s + l.qty * l.item.price, 0),
     [cart],
   );
 
-  const add = (item: MenuItem) =>
-    setCart((c) => ({ ...c, [item.name]: { item, qty: (c[item.name]?.qty ?? 0) + 1 } }));
+  // Open notes modal when user picks a new item
+  const requestAdd = (item: MenuItem) => {
+    if (cart[item.name]) {
+      // already in cart, just increment qty
+      setCart((c) => ({ ...c, [item.name]: { ...c[item.name], qty: c[item.name].qty + 1 } }));
+    } else {
+      setNoteText("");
+      setNotesItem(item);
+    }
+  };
+
+  const confirmAdd = () => {
+    if (!notesItem) return;
+    const trimmed = noteText.trim();
+    setCart((c) => ({
+      ...c,
+      [notesItem.name]: { item: notesItem, qty: 1, notes: trimmed || undefined },
+    }));
+    setNotesItem(null);
+    setNoteText("");
+  };
+
   const dec = (name: string) =>
     setCart((c) => {
       const cur = c[name];
@@ -54,6 +77,12 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
       }
       return { ...c, [name]: { ...cur, qty: cur.qty - 1 } };
     });
+  const inc = (name: string) =>
+    setCart((c) => {
+      const cur = c[name];
+      if (!cur) return c;
+      return { ...c, [name]: { ...cur, qty: cur.qty + 1 } };
+    });
   const remove = (name: string) =>
     setCart((c) => {
       const { [name]: _, ...rest } = c;
@@ -63,9 +92,10 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
 
   const sendWhatsApp = () => {
     if (totalQty === 0) return;
-    const lines = Object.values(cart).map(
-      (l) => `• ${l.qty}× ${l.item.name} — ${(l.qty * l.item.price).toFixed(2).replace(".", ",")}€`,
-    );
+    const lines = Object.values(cart).map((l) => {
+      const base = `• ${l.qty}× ${l.item.name} — ${(l.qty * l.item.price).toFixed(2).replace(".", ",")}€`;
+      return l.notes ? `${base}\n   📝 ${l.notes}` : base;
+    });
     const header = takeaway
       ? `📦 *Pedido para llevar*`
       : `🪑 *Mesa: ${table.trim()}*`;
@@ -160,7 +190,7 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
                                     <span className="font-bold w-5 text-center">{qty}</span>
                                   </>
                                 )}
-                                <button onClick={() => add(it)} className="bg-[var(--neon-red)] text-white p-1.5 rounded-full hover:scale-110 transition">
+                                <button onClick={() => requestAdd(it)} className="bg-[var(--neon-red)] text-white p-1.5 rounded-full hover:scale-110 transition">
                                   <Plus className="h-3 w-3" />
                                 </button>
                               </div>
@@ -189,25 +219,30 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
                       </p>
                     )}
                     {Object.values(cart).map((l) => (
-                      <div key={l.item.name} className="glass rounded-lg p-2 flex items-center gap-2">
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold truncate">{l.item.name}</div>
-                          <div className="text-[11px] text-muted-foreground">
-                            {l.qty} × {l.item.price.toFixed(2).replace(".", ",")}€
+                      <div key={l.item.name} className="glass rounded-lg p-2 flex flex-col gap-1">
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-bold truncate">{l.item.name}</div>
+                            <div className="text-[11px] text-muted-foreground">
+                              {l.qty} × {l.item.price.toFixed(2).replace(".", ",")}€
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <button onClick={() => dec(l.item.name)} className="glass p-1 rounded-full">
+                              <Minus className="h-3 w-3" />
+                            </button>
+                            <span className="text-xs font-bold w-4 text-center">{l.qty}</span>
+                            <button onClick={() => inc(l.item.name)} className="bg-[var(--neon-red)] text-white p-1 rounded-full">
+                              <Plus className="h-3 w-3" />
+                            </button>
+                            <button onClick={() => remove(l.item.name)} className="ml-1 text-muted-foreground hover:text-[var(--neon-red)]">
+                              <X className="h-3 w-3" />
+                            </button>
                           </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <button onClick={() => dec(l.item.name)} className="glass p-1 rounded-full">
-                            <Minus className="h-3 w-3" />
-                          </button>
-                          <span className="text-xs font-bold w-4 text-center">{l.qty}</span>
-                          <button onClick={() => add(l.item)} className="bg-[var(--neon-red)] text-white p-1 rounded-full">
-                            <Plus className="h-3 w-3" />
-                          </button>
-                          <button onClick={() => remove(l.item.name)} className="ml-1 text-muted-foreground hover:text-[var(--neon-red)]">
-                            <X className="h-3 w-3" />
-                          </button>
-                        </div>
+                        {l.notes && (
+                          <p className="text-[10px] italic text-[var(--neon-blue)] pl-1">📝 {l.notes}</p>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -230,6 +265,80 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
                       Te redirigiremos a WhatsApp con tu pedido pre-escrito.
                     </p>
                   </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Notes / observations modal */}
+      <AnimatePresence>
+        {notesItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[55] bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setNotesItem(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass-strong rounded-3xl p-6 w-full max-w-md neon-border-blue relative"
+            >
+              <button
+                onClick={() => setNotesItem(null)}
+                className="absolute top-3 right-3 glass p-2 rounded-full hover:neon-border-red transition"
+              >
+                <X className="h-4 w-4" />
+              </button>
+              <p className="uppercase text-[10px] tracking-[0.3em] neon-text-red mb-1">Personaliza</p>
+              <h3 className="font-display text-2xl neon-text-blue mb-1">{notesItem.name}</h3>
+              <p className="text-xs text-muted-foreground mb-4">
+                ¿Quieres añadir alguna observación o quitar algún ingrediente?
+              </p>
+
+              <div className="space-y-3">
+                <textarea
+                  autoFocus
+                  value={noteText}
+                  onChange={(e) => setNoteText(e.target.value)}
+                  placeholder="Ej: sin cebolla, sin pepinillos, poco hecha..."
+                  rows={3}
+                  className="w-full glass rounded-xl px-4 py-3 text-sm focus:outline-none focus:neon-border-blue resize-none"
+                />
+
+                <div className="flex flex-wrap gap-2">
+                  {["Sin cebolla", "Sin pepinillos", "Sin salsa", "Sin tomate", "Sin lechuga"].map((tag) => (
+                    <button
+                      key={tag}
+                      type="button"
+                      onClick={() =>
+                        setNoteText((t) => (t ? `${t}, ${tag.toLowerCase()}` : tag))
+                      }
+                      className="glass text-[11px] px-3 py-1 rounded-full hover:neon-border-red transition"
+                    >
+                      + {tag}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 pt-2">
+                  <button
+                    onClick={confirmAdd}
+                    className="px-4 py-3 rounded-full glass font-bold uppercase tracking-wider text-xs hover:neon-border-blue transition"
+                  >
+                    Sin observaciones
+                  </button>
+                  <button
+                    onClick={confirmAdd}
+                    className="px-4 py-3 rounded-full bg-[var(--neon-red)] text-white font-bold uppercase tracking-wider text-xs hover:scale-[1.02] transition"
+                  >
+                    Añadir al carrito
+                  </button>
                 </div>
               </div>
             </motion.div>
