@@ -66,12 +66,19 @@ export function OrderSystem({ menu }: { menu: MenuItem[] }) {
     const lines = Object.values(cart).map(
       (l) => `• ${l.qty}× ${l.item.name} — ${(l.qty * l.item.price).toFixed(2).replace(".", ",")}€`,
     );
+    const header = takeaway
+      ? `📦 *Pedido para llevar*`
+      : `🪑 *Mesa: ${table.trim()}*`;
     const msg =
       `¡Hola SBH! Me gustaría hacer un pedido:\n\n` +
+      `${header}\n\n` +
       lines.join("\n") +
       `\n\n*Total: ${total.toFixed(2).replace(".", ",")}€*\n\nGracias 🍔🔥`;
     const url = `https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`;
     window.open(url, "_blank");
+    setAskTable(false);
+    setTable("");
+    setTakeaway(false);
   };
 
   const grouped = useMemo(() => {
